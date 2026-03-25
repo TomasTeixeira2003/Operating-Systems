@@ -17,6 +17,7 @@ This repository contains the second phase of the **TecnicoFS** project, extendin
 
 ## System Architecture
 
+![Project Architecture](architecture_proj2.png)
 
 
 The system consists of four main components:
@@ -43,3 +44,25 @@ Each message box on the server side is backed by a TecnicoFS i-node. When a mess
 This version of the project emphasizes **inter-process communication (IPC)** and **server-side threading**:
 * **Global Mutex**: The core TecnicoFS operations are protected by a synchronization layer to ensure consistency during concurrent client requests.
 * **Session Management**: The server tracks active connections and ensures that file handles are managed correctly even if a client disconnects abruptly.
+
+---
+
+## Running the System
+Start the server:
+```bash
+./mbroker/mbroker <pipe_name/socket_path>
+```
+Run a Manager to create a box:
+```bash
+./manager/manager <socket_path> create /box1
+```
+Run a subscriber:
+```bash
+./subscriber/subscriber <socket_path> /box1
+```
+Publish a message:
+```bash
+./publisher/publisher <socket_path> /box1 "Hello World"
+```
+
+
